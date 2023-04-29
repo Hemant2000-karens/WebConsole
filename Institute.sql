@@ -1,4 +1,4 @@
--- MariaDB dump 10.19  Distrib 10.4.21-MariaDB, for osx10.10 (x86_64)
+-- MariaDB dump 10.19  Distrib 10.4.28-MariaDB, for osx10.10 (x86_64)
 --
 -- Host: localhost    Database: Institute
 -- ------------------------------------------------------
@@ -228,6 +228,175 @@ LOCK TABLES `antiRaggingSenate` WRITE;
 /*!40000 ALTER TABLE `antiRaggingSenate` DISABLE KEYS */;
 INSERT INTO `antiRaggingSenate` VALUES (1,'Prof. P.N Kondekar','Director/ Chairman',''),(2,'Prof. Prashant Jain','PIC, Convener',''),(3,'Dr. Deepmala ','Head Institute Conselling Service',''),(4,'Dr. Irshad Ahmed Ansari','Member',''),(5,'','Member',''),(6,'','Member',''),(7,'','Member','');
 /*!40000 ALTER TABLE `antiRaggingSenate` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_group`
+--
+
+DROP TABLE IF EXISTS `auth_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_group`
+--
+
+LOCK TABLES `auth_group` WRITE;
+/*!40000 ALTER TABLE `auth_group` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_group_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_group_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_group_permissions` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_group_permissions_group_id_permission_id_0cd325b0_uniq` (`group_id`,`permission_id`),
+  KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`),
+  CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_group_permissions`
+--
+
+LOCK TABLES `auth_group_permissions` WRITE;
+/*!40000 ALTER TABLE `auth_group_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_group_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_permission`
+--
+
+DROP TABLE IF EXISTS `auth_permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_permission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `content_type_id` int(11) NOT NULL,
+  `codename` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
+  CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_permission`
+--
+
+LOCK TABLES `auth_permission` WRITE;
+/*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
+INSERT INTO `auth_permission` VALUES (1,'Can add log entry',1,'add_logentry'),(2,'Can change log entry',1,'change_logentry'),(3,'Can delete log entry',1,'delete_logentry'),(4,'Can view log entry',1,'view_logentry'),(5,'Can add permission',2,'add_permission'),(6,'Can change permission',2,'change_permission'),(7,'Can delete permission',2,'delete_permission'),(8,'Can view permission',2,'view_permission'),(9,'Can add group',3,'add_group'),(10,'Can change group',3,'change_group'),(11,'Can delete group',3,'delete_group'),(12,'Can view group',3,'view_group'),(13,'Can add user',4,'add_user'),(14,'Can change user',4,'change_user'),(15,'Can delete user',4,'delete_user'),(16,'Can view user',4,'view_user'),(17,'Can add content type',5,'add_contenttype'),(18,'Can change content type',5,'change_contenttype'),(19,'Can delete content type',5,'delete_contenttype'),(20,'Can view content type',5,'view_contenttype'),(21,'Can add session',6,'add_session'),(22,'Can change session',6,'change_session'),(23,'Can delete session',6,'delete_session'),(24,'Can view session',6,'view_session');
+/*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user`
+--
+
+DROP TABLE IF EXISTS `auth_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `password` varchar(128) NOT NULL,
+  `last_login` datetime(6) DEFAULT NULL,
+  `is_superuser` tinyint(1) NOT NULL,
+  `username` varchar(150) NOT NULL,
+  `first_name` varchar(150) NOT NULL,
+  `last_name` varchar(150) NOT NULL,
+  `email` varchar(254) NOT NULL,
+  `is_staff` tinyint(1) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `date_joined` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user`
+--
+
+LOCK TABLES `auth_user` WRITE;
+/*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user_groups`
+--
+
+DROP TABLE IF EXISTS `auth_user_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user_groups` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_user_groups_user_id_group_id_94350c0c_uniq` (`user_id`,`group_id`),
+  KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`),
+  CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
+  CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user_groups`
+--
+
+LOCK TABLES `auth_user_groups` WRITE;
+/*!40000 ALTER TABLE `auth_user_groups` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_user_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user_user_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_user_user_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user_user_permissions` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_user_user_permissions_user_id_permission_id_14a6b632_uniq` (`user_id`,`permission_id`),
+  KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`),
+  CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user_user_permissions`
+--
+
+LOCK TABLES `auth_user_user_permissions` WRITE;
+/*!40000 ALTER TABLE `auth_user_user_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_user_user_permissions` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -467,6 +636,116 @@ LOCK TABLES `curriculum` WRITE;
 /*!40000 ALTER TABLE `curriculum` DISABLE KEYS */;
 INSERT INTO `curriculum` VALUES (1,1,'NS1001','Mathematics - 1','MS','Common for all','#264653'),(2,1,'NS1002','Engineering Mechanics','NS','Common for all','#264653'),(3,1,'HS1001','Effective Communications','LA','Common for all','#264653'),(4,1,'IT1001','Introduction to Programming In C','CSE','Only for CSE','#2a9d8f'),(5,1,'IT1002','Introduction to Programming In Python','CSE','Common for ECE,ME,SM and DS','#e9c46a'),(6,1,'ES1002','Basic Electronics','ECE','Only for CSE','#2a9d8f'),(7,1,'DS1005','Engineering Graphics','ME','Common for ECE,ME,SM and DS','#e9c46a'),(8,1,'CS1001','Introduction to Profession','CSE','Common for CSE','#f4a261'),(9,1,'EC1001','Introduction to Profession','ECE','Common for ECE','#e76f51'),(10,1,'ME1001','Introduction to Profession','ME','Common for ME','#ef476f'),(11,1,'SM1001','Introduction to Profession','ME','Common for SM','#118ab2'),(12,1,'DS1002','Design Fundamentals 1','DS','Common for Design','#606c38'),(13,1,'DS1003','Design Drawing','DS','Common for Design','#606c38'),(14,1,'DS1004','Representation Technique','DS','Common for Design','#606c38'),(15,1,'HS1001','Effective Communications','LA','Elective course','#2ec4b6'),(16,1,'IT1002','Introduction  to Programming  In Python','CSE','Common for ECE,ME,SM and DS','#e9c46a'),(17,1,'DS1001','Introduction  to Profession','DS','Common for Design','#606c38'),(18,1,'','Innovation Theory and Practice','','Common for all','#264653'),(19,1,'PC1001','Professional  Development  Course','','Common for all','#264653'),(20,3,'IT2001','Data Structures in C','CSE','Common for all','#264653'),(21,3,'IT2002','Data Structures in Python','CSE','',''),(22,3,'CS2002','Computer Organization & Architecture','CSE','Common for CSE','#f4a261'),(23,3,'EC2002','Digital Electronics & Microprocessor Interfacing','ECE','Common for ECE','#e76f51'),(24,3,'ME2002','Manufacturing Process','ME','Common for ME & SM','#8d99ae'),(25,3,'CS2003','Database Management Systems','CSE','Common for CSE','#f4a261'),(26,3,'EC203a','Principle of Analog Communications','ECE','Common for ECE','#e76f51'),(27,3,'EC203b','Network Theory (Analysis & Synthesis)','ECE','Common for ECE','#e76f51'),(28,3,'ME2003','Solid Mechanics','ME','Common for ME','#ef476f'),(29,3,'SM2003','Solid Mechanics + Design of Mechanical Components','ME','Common for SM','#118ab2'),(30,3,'CS2004','Introduction to Data Science','CSE','Common for CSE','#f4a261'),(31,3,'EC204a','Electronics Devices & Circuits','ECE','Common for ECE','#e76f51'),(32,3,'EC204b','Instrumentation & Measurments','ECE','Common for ECE','#e76f51'),(33,3,'ME2004','Engineering Thermodynamics','ME','Common for ME','#ef476f'),(34,3,'SM2004','Engineering Thermodynamics + Heat Transfer','ME','Common for SM','#118ab2'),(35,3,'OE2C09','Game Theory','CSE','',''),(36,3,'OE2E01','Sensors & Actuators','ECE','',''),(37,3,'OE2E02','Probability & Random Process','ECE','',''),(38,3,'EC8006','Photovoltaics: Fundamentals & Applications','ECE','',''),(39,3,'OE2M07','Operations Research','ME','',''),(40,3,'OE2N05','Complex Analysis & Linear Algebra','NS','',''),(41,3,'OE2D15 ','Design Arts & Aesthetics','DS','',''),(42,3,'OE2D11','Design Thinking','DS','',''),(43,3,'OE2D14','Science & Culture - A Comparison','LA','',''),(44,3,'NS2001','Biology for Engineers','CSE','Only for CSE','#2a9d8f'),(45,3,'IT2C01','OOPs in Java','CSE','Common for CSE','#f4a261'),(46,3,'IT2E01','Matlab & Simulink, Pspics','ECE','Common for ECE','#e76f51'),(47,3,'IT2M01','drawing/drafting/modelling and kinematic/ dynamic modelling','ME','Common for ME','#ef476f'),(48,3,'IT2S01','drawing/drafting/modelling and kinematic/ dynamic modelling ','SM','Common for SM','#118ab2'),(49,3,'DS2005','Studies in Forms','DS','',''),(50,3,'DS2006','Industrial Design 1','DS','',''),(51,3,'DS2007','Communication Design 1','DS','',''),(52,3,'DS2008','Design Project 1','DS','',''),(53,3,'ME2002','Manufacturing Process','ME','Common for ME & SM','#8d99ae'),(54,3,'PR2002','Discipline Project','','Specific to Discipline','#bc6c25'),(55,3,'PC2002','Professional  Development  Course','Placement','Common for all','#264653'),(56,5,'DS3001','Engineering Design —Including Design and Fabrication Project','','Common for all','#264653'),(57,5,'CS3009','Network Security & Cryptography','CSE','Common for CSE','#f4a261'),(58,5,'EC3009','VLSI System Design (VLSI IC desien, logic Synthesis using VHDL)','ECE','Common for ECE','#e76f51'),(59,5,'ME3009','Design of Mechanical Components','ME','',''),(60,5,'SM3009','Additive and Subtractive Manufacturing Processes','ME','',''),(61,5,'CS3010','Software Engineering','CSE','Common for CSE','#f4a261'),(62,5,'EC3010','Fundamentals of Electromagnetic Theory','ECE','Common for ECE','#e76f51'),(63,5,'ME3010','Industrial  Internet of Things','ME','Common for ME','#ef476f'),(64,5,'SM3010','Computer Aided Product Development','ME','',''),(65,5,'CS3011','Artificial  Intelligence','CSE','Common for CSE','#f4a261'),(66,5,'EC3011','Digital Communications','ECE','Common for ECE','#e76f51'),(67,5,'ME3011','Heat Transfer','ME','Common for ME','#ef476f'),(68,5,'SM3011','Control Systems','SM','',''),(69,5,'SM3012','Advanced Cyber Physical System','ME','',''),(70,5,'OE3C35','Software Defined Networking','CSE','',''),(71,5,'OE3E25','VLSI Design Modeling','ECE','',''),(72,5,'OE3E40','Computation Genomic & Proteomic','ECE','',''),(73,5,'OE4E50','Detection & Estimation Theory','ECE','',''),(74,5,'OE3M26','Computer Aided Design','ME','',''),(75,5,'OE3M27','Vibration of Mechanical Systens','ME','',''),(76,5,'OE3D15','Applied Ergnomics','DS','',''),(77,5,'OE3D16','Visual Ergonomics','DS','',''),(78,5,'OE3D25','Lighteing Design','DS','',''),(79,5,'OE3D26','New Media Arts','DS','',''),(80,5,'IT3C01','Computer Networks Lab','CSE','',''),(81,5,'IT3E01','Tanner Tool (Tspice), VHDL & Verilog ','ECE','',''),(82,5,'IT3M01','CATIA & Power Mill','ME','',''),(83,5,'DS3001','Engineering Design -Including Design and Fabrication Project','','',''),(84,5,'DS3009','Service Design','DS','',''),(85,5,'DS3010','Sustainable Design','DS','',''),(86,5,'DS3011','Design Management','DS','',''),(87,5,'DS3012','Design Project 4 (compulsory)','DS','',''),(88,5,'PR3003','Optional Project','','Specific to Discipline','#bc6c25'),(89,5,'PC3003','Professional  Development  Course','Placement','Common for all','#264653'),(90,7,'CS8016','Cloud Computing','CSE','',''),(91,7,'EC8033','Radio Frequency Integrated Circuits Design','ECE','',''),(92,7,'OE4E69','Optical Communications','ECE','',''),(93,7,'ME5M01','Manufacturing Science','ME','',''),(94,7,'OE4M70','Advanced Mechanics of Solids','ME','',''),(95,7,'OE4L73','Life Skills Management','LA','',''),(96,7,'CS8018','Web Mining','CSE','',''),(97,7,'EC8002','Advanced Engineering Electromagnetics','ECE','',''),(98,7,'EC8029','Advanced Digital Filter Design','ECE','',''),(99,7,'OE4E71','Satellite Communication','ECE','',''),(100,7,'OE4M23','Business Analytics using R','ME','',''),(101,7,'ME5D02','Mechanical Vibrations & Condition Monitoring','ME','',''),(102,7,'CS8017','Intrusion Detection Systems','CSE','',''),(103,7,'EC8004','Pattern Recognition & Machine Learning','ECE','',''),(104,7,'EC8005','Advanced Semiconductor Devices','ECE','',''),(105,7,'ME8012','Computer Aided Geometric Design','ME','',''),(106,7,'ME8002','Design of Experinments','ME','',''),(107,7,'CS8007','Social Network Analysis','CSE','',''),(108,7,'EC8016','Electromagnetic Interference & Compatibility','ECE','',''),(109,7,'EC8030','CMOS Memory Design','ECE','',''),(110,7,'EC8031','Digital Image Processing','ECE','',''),(111,7,'ME8003','Sensors & Actuators','ME','',''),(112,7,'OE4M35','Advanced Manufacturing Processes & Technologies','ME','',''),(113,7,'CS8004','Deep Learning & Applications','CSE','',''),(114,7,'EC8017','Internet of things','ECE','',''),(115,7,'EC8032','Numerical Techniques in Electromagetics','ECE','',''),(116,7,'OE4M72','Computational Material Science','ME','',''),(117,7,'OE4M22','Industrial Instrumentation & Metrology','ME','',''),(118,7,'DS4013','Design Seminar I','DS','',''),(119,7,'DS4014','Design Thesis II','DS','',''),(120,7,'PC4004','Professional  Development  Course','Placement','Common for all','#264653'),(121,2,'NS103a','ODE & PDE','NS','Common for ECE,ME,SM','#8338ec'),(122,2,'NS103b','Linear Algebra','NS','Common for CSE','#f4a261'),(123,2,'NS1004','Physics II','NS','Common for all','#264653'),(124,2,'ES1002','Basic Electronics','ECE','Common for all','#264653'),(125,2,'DS1005','Engineering Graphics','ME','Common for all','#264653'),(126,2,'ES1003','Innovation Theory and Practice','','Common for all','#264653'),(127,2,'HS1002','Indian Culture, Ethics & Human Values','LA','Common for all','#264653'),(128,2,'DS1006','Design Fundamentals 2','DS','Common for Design','#606c38'),(129,2,'DS1007','Introduction to Ergonomics in Design','DS','Common for Design','#606c38'),(130,2,'DS1008','Software Skills','DS','Common for Design','#606c38'),(131,2,'ES1002','Basic Electronics','ECE','Common for Design','#606c38'),(132,2,'PC1002','Professional  Development  Course','Placement','Common for all','#264653'),(133,4,'CS2005','Language Theory','CSE','Common for CSE','#f4a261'),(134,4,'EC2005','Digital Signal Processing','ECE','Common for ECE','#e76f51'),(135,4,'ME2005','Engineering Material & Characterization','ME','Common for ME & SM','#8d99ae'),(136,4,'CS2006','Operating Systems','CSE','Common for CSE','#f4a261'),(137,4,'EC2006','Control Systems','ECE','Common for ECE','#e76f51'),(138,4,'ME2006','Kinematics and Dynamics of Machines','ME','Common for ME & SM','#8d99ae'),(139,4,'CS2007','Design & Analysis of Algorithm','CSE','Common for CSE','#f4a261'),(140,4,'EC207a','AI and its application','ECE','Common for ECE','#e76f51'),(141,4,'EC207b','Architecture of Cellular Systems','ECE','Common for ECE','#e76f51'),(142,4,'ME2007','Manufacturing Technology','ME','Common for ME','#ef476f'),(143,4,'SM2007','Cyber Physical Production Systems','SM','Common for SM','#118ab2'),(144,4,'CS2008','Computer Network','CSE','Common for CSE','#f4a261'),(145,4,'EC2008','Analog Integrated Circuit','ECE','Common for ECE','#e76f51'),(146,4,'ME2008','Fluid Mechanics and Machines','ME','Common for ME','#ef476f'),(147,4,'SM2008','Industrial Automation','SM','Common for SM','#118ab2'),(148,4,'OE2C01','NoSQL Databases','CSE','',''),(149,4,'OE2C02','Descrete Structures','CSE','',''),(150,4,'OE2E03','Digital System Design','ECE','',''),(151,4,'OE2E04','Introduction to deep learning','ECE','',''),(152,4,'OE2E05','Antenna Theory and Design','ECE','',''),(153,4,'OE2D05','Packaging Design and Branding','DS','',''),(154,4,'OE2D06','Interface Design','DS','',''),(155,4,'OE2M06','Fundamental of Robotics','ME','',''),(156,4,'OE2S09','Management concept and technology','SM','',''),(157,4,'NS2001','Biology for Engineers','','Common for CSE','#f4a261'),(158,4,'IT2C02','Embedded System Lab','CSE','Common for CSE','#f4a261'),(159,4,'IT2E02','IT Workshop II','ECE','Common for ECE','#e76f51'),(160,4,'IT2M02','IT Workshop II','ME','Common for ME','#ef476f'),(161,4,'IT2S02','IT Workshop II (covers contents related to solid modelling and manufacturing)','SM','Common for SM','#118ab2'),(162,4,'DS2009','Design Research Including User Study','DS','Common for Design','#606c38'),(163,4,'DS2010','Material and Processes','DS','Common for Design','#606c38'),(164,4,'DS2011','Industrial Design 2','DS','Common for Design','#606c38'),(165,4,'DS2012','Communication Design 2','DS','Common for Design','#606c38'),(166,4,'DS2013','Design Project 2','DS','Common for Design','#606c38'),(167,4,'PR2002','Discipline Project','','Common for all','#264653'),(168,4,'PC2002','Professional Development Course','Placement','Common for all','#264653'),(169,6,'DS3014','Fabrication Project','','Common for all','#264653'),(170,6,'HS3004','Ecology and Environment Science','','Common for all','#264653'),(171,6,'OE3C28','Cyber Security','CSE','',''),(172,6,'CS8007','Social Network Analysis','CSE','',''),(173,6,'OE3E29','Industrial Microwave and Communication','ECE','',''),(174,6,'OE3D12','Communication Skills Management','LA','',''),(175,6,'OE3D20','Industrial Design','DS','',''),(176,6,'OE3M04','Computer Aided Manufacturing','ME','',''),(177,6,'OE3M27','Vibration of Mechanical systems','ME','',''),(178,6,'OE3M31','Machine Learning','ME','',''),(179,6,'ME8017','Electric Vehicle and Mobility','ME','',''),(180,6,'CS8009','Image Processing','CSE','',''),(181,6,'CS8010','Introduction to Digital watermarking','CSE','',''),(182,6,'OE3E09','IC Fabrication','ECE','',''),(183,6,'OE3E32','Biomedical Instrumentation','ECE','',''),(184,6,'OE3D06','Indian Philosophy and Literature in English','LA','',''),(185,6,'OE3D21','Communication Design','DS','',''),(186,6,'OE3M10','Finite Element Methods for Mechanical Engineering','ME','',''),(187,6,'ME8016','Biomaterials Science and Engineering','ME','',''),(188,6,'CS8011','Machine Learning','CSE','',''),(189,6,'OE3C34','Cyber Physical Systems','CSE','',''),(190,6,'OE3E15','Information Theory and Coding','ECE','',''),(191,6,'OE3E35','Speech processing','ECE','',''),(192,6,'OE3D37','Application for Renewable Energy Resourses in Design','DE','',''),(193,6,'OE3D39','Traditional Media','DS','',''),(194,6,'OE3M18','Maintenance and Reliability','ME','',''),(195,6,'OE3M19','IC Engine','ME','',''),(196,6,'IT3C03','Web and mobile App development','CSE','Common for CSE','#f4a261'),(197,6,'IT3E03','Cadence, Silvaco, Xylink,Sentaurus Tcad ','ECE','Common for ECE','#e76f51'),(198,6,'IT3M03','IT Workshop','ME','Common for ME','#ef476f'),(199,6,'DS3014','Fabrication Project','','Common for all','#264653'),(200,6,'HS3004','Ecology and Environment Science','','Common for all','#264653'),(201,6,'DS3015','Design Forecasting and Trend Research','DS','Common for Design','#606c38'),(202,6,'PR3003','Optional Project','','',''),(203,6,'PC3003','Professional  Development  Course','Placement','',''),(204,8,'CS8013','Mobile and Wireless Network','CSE','',''),(205,8,'CS8021','Information Retrival and Semantic Web ','CSE','',''),(206,8,'EC8023','Modern Radar System','ECE','',''),(207,8,'EC8025','Wavelet and Filter Bank ','ECE','',''),(208,8,'OE4M51','Design of Mechanical Systems','ME','',''),(209,8,'OE4M65','Biomedical Engineering: Fundamentals and Applications ','ME','',''),(210,8,'CS8015','Computer Vision with Deep Learning','CSE','',''),(211,8,'CS8018','Hardware Security','CSE','',''),(212,8,'EC8021','Fundamentals of 5G and beyond 5G Mobile Network ','ECE','',''),(213,8,'OE4E64','Microwave Remote Sensing ','ECE','',''),(214,8,'ME8018','Fracture and Fatigue','ME','',''),(215,8,'OE4M68','Nano finishing Science and Technology ','ME','',''),(216,8,'BTP4001','BTP','','',''),(217,8,'PR4001','Project-Based-Internship (15C)','','',''),(218,8,'DS497','Design Seminar II ','DS','',''),(219,8,'DS499','Design Thesis II ','DS','',''),(220,8,'PC4004','Professional Development Course ','Placement','','');
 /*!40000 ALTER TABLE `curriculum` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_admin_log`
+--
+
+DROP TABLE IF EXISTS `django_admin_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_admin_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `action_time` datetime(6) NOT NULL,
+  `object_id` longtext DEFAULT NULL,
+  `object_repr` varchar(200) NOT NULL,
+  `action_flag` smallint(5) unsigned NOT NULL CHECK (`action_flag` >= 0),
+  `change_message` longtext NOT NULL,
+  `content_type_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `django_admin_log_content_type_id_c4bce8eb_fk_django_co` (`content_type_id`),
+  KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`),
+  CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
+  CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_admin_log`
+--
+
+LOCK TABLES `django_admin_log` WRITE;
+/*!40000 ALTER TABLE `django_admin_log` DISABLE KEYS */;
+/*!40000 ALTER TABLE `django_admin_log` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_content_type`
+--
+
+DROP TABLE IF EXISTS `django_content_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_content_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app_label` varchar(100) NOT NULL,
+  `model` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_content_type`
+--
+
+LOCK TABLES `django_content_type` WRITE;
+/*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
+INSERT INTO `django_content_type` VALUES (1,'admin','logentry'),(3,'auth','group'),(2,'auth','permission'),(4,'auth','user'),(5,'contenttypes','contenttype'),(6,'sessions','session');
+/*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_migrations`
+--
+
+DROP TABLE IF EXISTS `django_migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_migrations` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `app` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `applied` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_migrations`
+--
+
+LOCK TABLES `django_migrations` WRITE;
+/*!40000 ALTER TABLE `django_migrations` DISABLE KEYS */;
+INSERT INTO `django_migrations` VALUES (1,'contenttypes','0001_initial','2023-04-29 07:00:42.774450'),(2,'auth','0001_initial','2023-04-29 07:00:43.558257'),(3,'admin','0001_initial','2023-04-29 07:00:43.718131'),(4,'admin','0002_logentry_remove_auto_add','2023-04-29 07:00:43.725928'),(5,'admin','0003_logentry_add_action_flag_choices','2023-04-29 07:00:43.733061'),(6,'contenttypes','0002_remove_content_type_name','2023-04-29 07:00:43.800708'),(7,'auth','0002_alter_permission_name_max_length','2023-04-29 07:00:43.859464'),(8,'auth','0003_alter_user_email_max_length','2023-04-29 07:00:43.893122'),(9,'auth','0004_alter_user_username_opts','2023-04-29 07:00:43.901387'),(10,'auth','0005_alter_user_last_login_null','2023-04-29 07:00:43.939619'),(11,'auth','0006_require_contenttypes_0002','2023-04-29 07:00:43.942172'),(12,'auth','0007_alter_validators_add_error_messages','2023-04-29 07:00:43.949680'),(13,'auth','0008_alter_user_username_max_length','2023-04-29 07:00:43.981308'),(14,'auth','0009_alter_user_last_name_max_length','2023-04-29 07:00:44.013474'),(15,'auth','0010_alter_group_name_max_length','2023-04-29 07:00:44.047826'),(16,'auth','0011_update_proxy_permissions','2023-04-29 07:00:44.056029'),(17,'auth','0012_alter_user_first_name_max_length','2023-04-29 07:00:44.089835'),(18,'sessions','0001_initial','2023-04-29 07:00:44.148347');
+/*!40000 ALTER TABLE `django_migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_session`
+--
+
+DROP TABLE IF EXISTS `django_session`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_session` (
+  `session_key` varchar(40) NOT NULL,
+  `session_data` longtext NOT NULL,
+  `expire_date` datetime(6) NOT NULL,
+  PRIMARY KEY (`session_key`),
+  KEY `django_session_expire_date_a5c62663` (`expire_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_session`
+--
+
+LOCK TABLES `django_session` WRITE;
+/*!40000 ALTER TABLE `django_session` DISABLE KEYS */;
+/*!40000 ALTER TABLE `django_session` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -1106,4 +1385,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-28 12:48:34
+-- Dump completed on 2023-04-29 14:45:30
